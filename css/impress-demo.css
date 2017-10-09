@@ -198,6 +198,14 @@ a:focus {
 
 .impress-enabled .step.active { opacity: 1 }
 
+/* substeps */
+.substep.future {
+    display:none;
+}
+.substep.present .substep.past{
+    display: block;
+}
+
 /*
     These 'slide' step styles were heavily inspired by HTML5 Slides:
     http://html5slides.googlecode.com/svn/trunk/styles.css

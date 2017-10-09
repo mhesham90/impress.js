@@ -823,6 +823,54 @@
             api.goto( document.querySelector( ".step.active" ), 500 );
         }, 250 ), false );
 
+
+        //substeps
+
+        //checking for substeps before next/prev step 
+        //and change their classes (past-present-future)
+
+        //adding future class to all substeps
+        document.querySelectorAll(".substep").forEach(function(sub) {
+            sub.classList.add('future')
+        });
+
+        function nextStep() {
+            let subStepArr = document.querySelectorAll('.step.active .substep.future');
+            let subStepPresent = document.querySelector('.step.active .substep.present')
+            if(subStepPresent != undefined){
+                subStepPresent.classList.remove('present')
+                subStepPresent.classList.add('past')    
+            }//turn present substep into past
+            if(subStepArr.length > 0){
+                let subStepNext = document.querySelector('.step.active .substep.future');
+                subStepNext.classList.remove('future')
+                subStepNext.classList.add('present')
+            }else{
+                api.next();
+            }//go to next substep if exists else go to next step
+        }
+
+        function prevStep() {
+            let subStepArr = document.querySelectorAll('.step.active .substep.past');
+            let subStepPresent = document.querySelector('.step.active .substep.present')
+            if(subStepPresent != undefined){
+                subStepPresent.classList.remove('present')
+                subStepPresent.classList.add('future')
+                    
+            }//turn present substep into future
+            if(subStepArr.length > 0){
+                subStepArr[subStepArr.length-1].classList.remove('past')
+                subStepArr[subStepArr.length-1].classList.add('present')
+            }else if(subStepPresent == undefined){
+                api.prev();
+                let subStepArr = document.querySelectorAll('.step.active .substep.past');
+                if(subStepArr.length > 0){
+                    subStepArr[subStepArr.length-1].classList.remove('past')
+                    subStepArr[subStepArr.length-1].classList.add('present')
+                }
+            }//go to prev substep if exists else go to prev step and check for substeps
+        }
+        
     }, false );
 
 } )( document, window );
