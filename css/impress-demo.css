@@ -74,6 +74,12 @@ table {
     border-spacing: 0;
 }
 
+/* 
+    setting cursor to laser pointer shape
+*/
+:root.laser{
+    cursor:url("../img/laser2.cur"), auto !important;
+ }
 /*
     Now here is when interesting things start to appear.
 
